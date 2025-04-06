@@ -10,6 +10,7 @@ require_once __DIR__ . '/../PHPMailer/src/Exception.php';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 class BookingController
+//MinhNhut ne
 {
     private $model;
     private $bookingDetailModel;
