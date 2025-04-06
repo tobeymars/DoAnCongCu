@@ -2,6 +2,7 @@
 require_once __DIR__ . '/../config/db.php';
 require_once __DIR__ . '/../Model/VenuesModel.php';
 require_once __DIR__ . '/../Model/EventModel.php';
+//Nguyễn Trương Tuấn Kiệt- 2180605351
 class HomeController
 {
     private $Venuemodel;
