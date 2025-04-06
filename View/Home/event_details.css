@@ -1,0 +1,211 @@
+/* Cấu hình chung */
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to right, #141e30, #243b55);
+    color: #fff;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container chính */
+.container {
+    max-width: 900px;
+}
+
+/* Card tổng quan */
+.card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease-in-out;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+/* Tiêu đề h1 */
+h1 {
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Container chính */
+.event-info {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    backdrop-filter: blur(8px);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Hiệu ứng khi hover */
+.event-info:hover {
+    transform: translateY(-5px);
+}
+
+/* Định dạng từng dòng thông tin */
+.event-info p {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    padding: 8px 12px;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.05);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.3s ease-in-out;
+}
+
+/* Hiệu ứng hover */
+.event-info p:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Màu chữ trắng cho dữ liệu lấy từ database */
+.text-white {
+    color: #ffffff !important;
+}
+
+/* Chỉnh màu chữ của tiêu đề */
+h3, .event-info p strong {
+    background: linear-gradient(to right, #ffcc00, #ff6600);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+}
+
+/* Trạng thái sự kiện */
+.text-success {
+    font-weight: bold;
+    color: #21ffed !important;
+    text-shadow: 1px 1px 5px rgba(40, 167, 69, 0.5);
+}
+
+.text-warning {
+    font-weight: bold;
+    color: #17fc50 !important;
+    text-shadow: 1px 1px 5px rgba(255, 204, 0, 0.5);
+}
+
+/* Nút bấm gradient đẹp */
+.btn-primary {
+    background: linear-gradient(to right, #ff416c, #ff4b2b);
+    border: none;
+    font-size: 1.2rem;
+    padding: 12px 25px;
+    font-weight: bold;
+    border-radius: 50px;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 4px 10px rgba(255, 65, 108, 0.5);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(to right, #ff4b2b, #ff416c);
+    transform: scale(1.05);
+    box-shadow: 0px 6px 15px rgba(255, 65, 108, 0.8);
+}
+
+/* Nút quay lại */
+.btn-outline-secondary {
+    border-color: #ccc;
+    color: #ccc;
+    transition: all 0.3s ease-in-out;
+}
+
+.btn-outline-secondary:hover {
+    background: #ccc;
+    color: #333;
+}
+
+/* Ảnh sự kiện */
+.event-image {
+    width: 100%;
+    max-width: 600px;
+    max-height: 350px;
+    object-fit: cover;
+    border-radius: 10px;
+    display: block;
+    margin: 15px auto;
+    box-shadow: 0px 5px 15px rgba(255, 255, 255, 0.2);
+    transition: transform 0.3s ease-in-out;
+}
+
+.event-image:hover {
+    transform: scale(1.05);
+}
+
+/* Hiệu ứng vào từ từ */
+@keyframes fadeInSlide {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+h3 {
+    font-size: 2rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+    margin-top: 20px;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 5px;
+    transition: all 0.3s ease-in-out;
+    animation: fadeInSlide 0.6s ease-out;
+}
+
+/* Gạch chân động */
+h3::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(to right, #ffcc00, #ff6600);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transform: scaleX(0);
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Hover hiệu ứng mở rộng gạch chân */
+h3:hover::after {
+    transform: scaleX(1);
+}
+
+/* Bảng */
+.table {
+    margin-top: 10px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.table-dark {
+    background-color: #222;
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Danh sách thiết bị */
+.list-group-item {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: #fff;
+    transition: background 0.3s ease-in-out;
+}
+
+.list-group-item:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+

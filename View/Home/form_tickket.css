@@ -1,0 +1,71 @@
+.booking-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: opacity 0.3s ease-in-out;
+}
+.booking-form {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(20px);
+    padding: 25px;
+    border-radius: 15px;
+    width: 420px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.4);
+    animation: fadeIn 0.3s ease-in-out;
+    position: relative;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: #fff;
+    transition: color 0.3s;
+}
+.close-button:hover {
+    color: red;
+}
+.form-control {
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    outline: none;
+    transition: 0.3s;
+}
+.form-control:focus {
+    border-color: cyan;
+    box-shadow: 0px 0px 8px cyan;
+}
+.booking-button {
+    width: 100%;
+    padding: 10px;
+    font-size: 18px;
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    border: none;
+    color: white;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+.booking-button:hover {
+    background: linear-gradient(135deg, #0072ff, #00c6ff);
+    box-shadow: 0px 0px 10px #00c6ff;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}

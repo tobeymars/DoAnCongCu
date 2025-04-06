@@ -1,0 +1,162 @@
+/* Tổng thể */
+body {
+    background: linear-gradient(to right, #f0f4f8, #d9e2e8); /* Nền gradient nhẹ */
+    font-family: 'Roboto', sans-serif; /* Sử dụng font hiện đại từ Google Fonts */
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 600px;
+    margin-top: 100px;
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+    position: relative;
+    z-index: 10;
+}
+
+/* Hiệu ứng shadow khi hover */
+.container:hover {
+    box-shadow: 0px 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+/* Tiêu đề */
+h1 {
+    text-align: center;
+    font-size: 32px;
+    color: #343a40;
+    font-weight: 600;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    word-wrap: break-word; /* Ngăn ngừa chữ nhảy dòng nếu tiêu đề dài */
+    white-space: nowrap; /* Ngăn ngừa xuống dòng không cần thiết */
+}
+
+/* Các thông tin hiển thị */
+p {
+    font-size: 18px;
+    color: #495057;
+    line-height: 1.6;
+}
+
+strong {
+    color: #007bff;
+    font-weight: 600;
+}
+
+/* Cải thiện các nút */
+.btn-custom {
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 18px;
+    border-radius: 50px;
+    transition: all 0.3s ease-in-out;
+    font-weight: 500;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Nút xác nhận xóa */
+.btn-danger {
+    background-color: #e74c3c;
+    border: none;
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #c0392b;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.btn-danger:active {
+    transform: translateY(0);
+}
+
+/* Nút xác nhận khôi phục */
+.btn-success {
+    background-color: #2ecc71;
+    border: none;
+    color: white;
+}
+
+.btn-success:hover {
+    background-color: #27ae60;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.btn-success:active {
+    transform: translateY(0);
+}
+
+/* Nút hủy */
+.btn-secondary {
+    background-color: #95a5a6;
+    border: none;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #7f8c8d;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.btn-secondary:active {
+    transform: translateY(0);
+}
+
+/* Nút hủy - Link */
+a {
+    display: inline-block;
+    margin-top: 15px;
+    font-size: 16px;
+    text-decoration: none;
+    color: #007bff;
+    font-weight: 500;
+}
+
+a:hover {
+    color: #0056b3;
+}
+
+/* Điều chỉnh kiểu cho các nhãn */
+.form-label {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+/* Thêm khoảng cách cho các phần tử trong form */
+form p {
+    margin-bottom: 20px;
+}
+
+/* Các biểu tượng hoặc những phần cần phải để khoảng cách */
+.back-link {
+    text-align: center;
+    display: block;
+    margin-top: 20px;
+}
+
+/* Chỉnh sửa icon, khoảng cách */
+i {
+    margin-right: 8px;
+}
+
+/* Cải thiện giao diện cho responsive */
+@media (max-width: 768px) {
+    .container {
+        max-width: 90%;
+        margin-top: 60px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+}

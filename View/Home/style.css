@@ -1,0 +1,123 @@
+body {
+    font-family: Arial, sans-serif !important;
+    margin: 0;
+    height: 100vh;
+    padding-top: 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f8f9fa;
+}
+
+/* Hero Header */
+.hero-header {
+    width: 100%;
+    text-align: center;
+    padding: 30px 0;
+    background: linear-gradient(to right, #007bff, #00c6ff);
+    color: white;
+    font-weight: bold;
+}
+
+/* Container chính */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+/* Thiết kế card */
+.venue-card {
+    width: 300px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    background: #fff;
+    text-align: center;
+    height: 90%;
+}
+.venue-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Ảnh trong card */
+.venue-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+/* Nội dung trong card */
+.venue-card .card-body {
+    padding: 15px;
+}
+
+.venue-card h5 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.venue-card p {
+    font-size: 14px;
+    color: #555;
+    margin: 5px 0;
+}
+
+/* Responsive cho màn hình nhỏ hơn */
+@media (max-width: 768px) {
+    .venue-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .venue-card {
+        width: 90%;
+    }
+}
+.swiper {
+    width: 100%;
+    padding: 20px 0;
+}
+
+.swiper-slide {
+    display: flex;
+    justify-content: center;
+}
+/* Điều chỉnh vị trí nút next/prev */
+.swiper-button-next, .swiper-button-prev {
+    color: #f0f0f0 !important; /* Màu trắng */
+    background: rgba(30, 108, 253, 0.5); /* Nền tối mờ */
+    width: 40px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+    border-radius: 30%;
+}
+
+.swiper-button-next:hover, .swiper-button-prev:hover {
+    background: rgba(0, 0, 0, 0.8); /* Đổi màu khi hover */
+}
+
+/* Căn chỉnh pagination */
+.swiper-pagination {
+    bottom: 15px !important; /* Đẩy pagination xuống một chút */
+}
+
+.swiper-pagination-bullet {
+    width: 10px;
+    height: 10px;
+    background: #61e4fb; /* Chấm trắng */
+    opacity: 0.6;
+    transition: 0.3s;
+}
+
+.swiper-pagination-bullet-active {
+    opacity: 1;
+    background: #0000ff; /* Chấm màu xanh khi active */
+}

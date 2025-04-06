@@ -1,0 +1,83 @@
+body{
+    font-family: var(--bs-body-font-family);
+    box-sizing: border-box;
+}
+.navbar1 {
+    width: 100% !important;
+    background: #333 !important;
+    padding: 8px 0 !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    display: flex !important;
+    justify-content: center !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+    z-index: 1000 !important;
+}
+.nav-container {
+    width: 100% !important;
+    max-width: 500px !important;
+    background: rgba(255, 255, 255, 0.2) !important;
+    border-radius: 15px !important;
+    backdrop-filter: blur(10px) !important;
+    padding: 10px !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1) !important;
+}
+.nav-list {
+    list-style: none !important;
+    display: flex !important;
+    gap: 20px !important;
+}
+.nav-item {
+    display: inline-block; /* hoặc inline-flex */
+    white-space: nowrap;   /* Ngăn text xuống dòng */
+    overflow: hidden;      /* Ẩn phần vượt quá nếu có */
+    text-overflow: ellipsis; /* Thêm dấu "..." nếu bị cắt */
+    max-width: 100%;       /* Giới hạn chiều rộng nếu cần */
+}
+.nav-link1 {
+    text-decoration: none !important;
+    color: yellowgreen !important;
+    padding: 10px 15px !important;
+    transition: 0.3s !important;
+    border-radius: 5px !important;
+}
+.nav-link1:hover {
+    background: rgba(255, 255, 255, 0.3) !important;
+}
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: absolute;
+    right: 90px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.user-info p {
+    margin: 0;
+    font-weight: bold;
+    color: white;
+}
+
+.user-info button {
+    padding: 5px 10px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.user-info button:hover {
+    background-color: #0056b3;
+}
+.user-icon i {
+    color: yellowgreen;
+}
+
+.logout-icon i {
+    color: red;
+}

@@ -1,0 +1,163 @@
+body {
+    background-color: #6fe4e1;
+    transition: background-color 0.5s ease;
+    padding-top: 50px;
+}
+.nav-item {
+    margin-top: 15 !important; 
+}
+.icon-container {
+    font-size: 5rem;
+    text-align: center;
+    margin-top: 20vh;
+    transition: all 1s ease-in-out;
+    opacity: 1;
+}
+.li{
+    margin-top: 10px !important;
+}
+.icon-container.shrink {
+    transform: scale(0.1);
+    opacity: 0;
+}
+
+.hidden {
+    display: none;
+}
+.container {
+    max-width:800px;
+    margin: 50px auto;
+    background-color: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    font-family: 'Poppins', sans-serif;
+}
+.custom-btn {
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 16px;
+    text-align: center;
+    border-radius: 25px !important;
+    background-color: #007bff !important;
+    color: white !important;
+    border: none !important;
+    box-shadow: none !important;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+.custom-btn:hover {
+    background-color: #0056b3 !important;
+    color: white !important;
+    transform: scale(1.05);
+}
+.input-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    width: 100%;
+}
+
+.input-group input {
+    flex: 1; /* Cho input chiếm hết phần còn lại */
+    padding: 10px;
+    padding-right: 35px;
+    border: none;
+    border-bottom: 2px solid #007bff;
+    outline: none;
+    background: transparent;
+    font-size: 16px;
+}
+
+.input-group label {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: 0.3s ease;
+    color: #000000;
+    pointer-events: none;
+}
+
+.input-group input:focus + label,
+.input-group input:valid + label {
+    top: 5px;
+    font-size: 12px;
+    color: #007bff;
+}
+
+.input-icon {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #000000;
+    z-index: 10; 
+}    
+/* Căn chỉnh icon con mắt */
+.toggle-password {
+    position: absolute;
+    right: 40px;
+    font-size: 16px;
+    color: #000000;
+    cursor: pointer;
+    z-index: 10;
+}
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(to bottom left, rgba(0, 0, 0, 0.98), rgb(0, 102, 255));
+    transition: transform 0.5s ease-in-out, background 0.5s ease-in-out;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3%;
+}
+
+.overlay-panel {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    color: white;
+    padding: 20px;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.overlay-left {
+    opacity: 1;
+}
+
+.overlay-right {
+    opacity: 0;
+}
+
+.overlay.move-left {
+    transform: translateX(0%);
+    background: linear-gradient(to bottom left, rgba(0, 0, 0, 0.98), rgb(0, 102, 255));
+}
+
+.overlay.move-left .overlay-left {
+    opacity: 1;
+}
+
+.overlay.move-left .overlay-right {
+    opacity: 0;
+}
+
+.overlay.move-right {
+    transform: translateX(100%);
+    background: linear-gradient(to bottom right, rgba(0, 0, 0, 0.98), rgb(0, 102, 255));
+}
+
+.overlay.move-right .overlay-left {
+    opacity: 0;
+}
+
+.overlay.move-right .overlay-right {
+    opacity: 1;
+}
