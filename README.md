@@ -4,7 +4,7 @@
 Website Đặt Sự Kiện là nền tảng trực tuyến giúp người dùng dễ dàng tạo, quản lý và đặt chỗ cho các sự kiện như hội thảo, hội nghị, tiệc cưới, sinh nhật, buổi biểu diễn, workshop, v.v. Dự án nhằm số hóa quy trình tổ chức sự kiện, giảm thiểu công việc thủ công và nâng cao trải nghiệm của cả người tổ chức lẫn người tham gia.
 
 🚀 Tính năng chính
-🔍 Tìm kiếm & xem thông tin chi tiết sự kiện
+
 
 🗓 Đặt chỗ tham gia sự kiện nhanh chóng
 
