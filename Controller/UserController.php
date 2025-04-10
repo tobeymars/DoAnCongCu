@@ -14,13 +14,13 @@ class UserController
         $this->conn = $database->getConnection();
         $this->model = new UserModel($this->conn);
     }
-   // Lấy tất cả user
-   public function getAllUsers()
-   {
-       if ($_SERVER["REQUEST_METHOD"] === "GET") {
-           $users = $this->model->getAllUser()->fetchAll(PDO::FETCH_ASSOC);
-           echo json_encode($users);
-       }
+    // Lấy tất cả user
+    public function getAllUsers()
+    {
+        if ($_SERVER["REQUEST_METHOD"] === "GET") {
+            $users = $this->model->getAllUser()->fetchAll(PDO::FETCH_ASSOC);
+            echo json_encode($users);
+        }
     }
     public function getRoles()
     {
@@ -28,6 +28,58 @@ class UserController
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function changePassword()
+    {
+        header("Content-Type: application/json");
+        $data = json_decode(file_get_contents("php://input"), true);
+
+        $token = $data["token"] ?? "";
+        $currentPassword = $data["currentPassword"] ?? "";
+        $newPassword = $data["newPassword"] ?? "";
+        $confirmPassword = $data["confirmPassword"] ?? "";
+
+        // 1. Xác thực token
+        $payload = JWTHelper::verifyToken($token);
+        if (!$payload) {
+            echo json_encode(["error" => "Token không hợp lệ"]);
+            exit();
+        }
+
+        $userId = $payload["user_id"];
+
+        // 2. Lấy thông tin người dùng
+        $user = $this->model->getUserInfo($userId);
+        if (!$user) {
+            echo json_encode(["error" => "Không tìm thấy người dùng"]);
+            exit();
+        }
+
+        // 3. Kiểm tra mật khẩu hiện tại
+        $hashedPassword = $user["Password"] ?? null;
+        if (!$hashedPassword || !password_verify($currentPassword, $hashedPassword)) {
+            echo json_encode(["error" => "Mật khẩu hiện tại không đúng"]);
+            exit;
+        }
+
+        // 4. Kiểm tra xác nhận mật khẩu
+        if ($newPassword !== $confirmPassword) {
+            echo json_encode(["error" => "Mật khẩu xác nhận không khớp"]);
+            exit();
+        }
+
+        // 5. Cập nhật mật khẩu
+        $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+        $result = $this->model->updatePassword($userId, $hashedPassword);
+
+        if ($result) {
+            echo json_encode([
+                "success" => true,
+                "message" => "Đổi mật khẩu thành công"
+            ]);
+        } else {
+            echo json_encode(["error" => "Đổi mật khẩu thất bại"]);
+        }
     }
     public function registerUser()
     {
@@ -37,13 +89,13 @@ class UserController
             $email = trim($_POST['email']);
             $password = $_POST['password'];
             $confirm_password = $_POST['confirm_password'];
-            $role_id = $_POST['role']; 
-            $result = $this->model->register($username, $password, $confirm_password, $fullname, $email, $role_id); 
+            $role_id = $_POST['role'];
+            $result = $this->model->register($username, $password, $confirm_password, $fullname, $email, $role_id);
             header('Content-Type: application/json');
             echo json_encode(["message" => $result, "success" => $result === "Đăng ký thành công."]);
             exit();
         }
-    }    
+    }
     public function registerUserad()
     {
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -52,7 +104,7 @@ class UserController
             $email = trim($_POST['email']);
             $password = $_POST['password'];
             $confirm_password = $_POST['confirm_password'];
-            $role_id = $_POST['role']; 
+            $role_id = $_POST['role'];
             $result = $this->model->register($username, $password, $confirm_password, $fullname, $email, $role_id);
             if ($result) {
                 header("Location: ../View/Users/index.php");
@@ -74,11 +126,11 @@ class UserController
                 exit();
             }
             if ($result) {
-                 // Lưu thông tin người dùng vào session
-                 $_SESSION['user_id'] = $result['UserId'];
-                 $_SESSION['username'] = $result['Username'];
-                 $_SESSION['full_name'] = $result['FullName'];
-                 $_SESSION['role'] = $result['RoleId'];
+                // Lưu thông tin người dùng vào session
+                $_SESSION['user_id'] = $result['UserId'];
+                $_SESSION['username'] = $result['Username'];
+                $_SESSION['full_name'] = $result['FullName'];
+                $_SESSION['role'] = $result['RoleId'];
                 $payload = [
                     "user_id" => $result['UserId'],
                     "username" => $result['Username'],
@@ -129,10 +181,10 @@ class UserController
             $images   = $_POST["images"] ?? "";
             $sdt = empty($sdt) ? "Chưa có" : $sdt;
             $images = empty($images) ? "Chưa có" : $images;
-            
+
             // Cập nhật thông tin người dùng
             $result = $this->model->updateUserInfo($userId, $fullName, $email, $sdt, $images);
-            
+
             if ($result) {
                 session_start();
                 $_SESSION['success_message'] = "Cập nhật thông tin người dùng thành công!";
@@ -204,18 +256,19 @@ if (isset($_GET['action'])) {
         $controller->loginUser();
     } elseif ($_GET['action'] === 'register') {
         $controller->registerUser();
-    }elseif ($_GET['action'] === 'getUserInfo') {
+    } elseif ($_GET['action'] === 'getUserInfo') {
         $controller->getUserInfo();
-    }
-    elseif ($_GET['action'] === 'updateUser') {
+    } elseif ($_GET['action'] === 'updateUser') {
         $controller->updateUser();
-    }elseif ($_GET['action'] === 'registerad') {
+    } elseif ($_GET['action'] === 'registerad') {
         $controller->registerUserad();
-    }elseif ($_GET['action'] === 'edituser') {
+    } elseif ($_GET['action'] === 'edituser') {
         $controller->updateUseradmin();
-    }elseif ($_GET['action'] === 'delete') {
+    } elseif ($_GET['action'] === 'delete') {
         $controller->deleteUser();
-    }elseif ($_GET['action'] === 'restore') {
+    } elseif ($_GET['action'] === 'restore') {
         $controller->restoreUser();
+    }elseif ($_GET['action'] === 'changePassword') {
+        $controller->changePassword();
     }
 }

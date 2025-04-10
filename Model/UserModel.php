@@ -93,7 +93,7 @@ class UserModel
     }
     public function getUserInfo($userId)
     {
-        $query = "SELECT UserId, Username, FullName, RoleId, Email, sdt, images FROM " . $this->table_name . " WHERE UserId = :UserId";
+        $query = "SELECT UserId, Username, FullName, RoleId, Email, sdt, images, Password FROM " . $this->table_name . " WHERE UserId = :UserId";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':UserId', $userId, PDO::PARAM_INT);
         $stmt->execute();
@@ -101,6 +101,13 @@ class UserModel
             return $stmt->fetch(PDO::FETCH_ASSOC);
         }
         return null;
+    }
+    public function updatePassword($userId, $newHashedPassword) {
+        $query = "UPDATE users SET Password = :password WHERE UserId = :userId";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(":password", $newHashedPassword);
+        $stmt->bindParam(":userId", $userId);
+        return $stmt->execute();
     }
     public function updateUserInfo($userId, $fullName, $email, $sdt, $images)
     {

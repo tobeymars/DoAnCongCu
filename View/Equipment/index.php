@@ -1,10 +1,14 @@
-<?php include '../shares/adminhd.php'; ?>
 <?php
 require_once __DIR__ . '/../../config/db.php';
 require_once __DIR__ . '/../../Model/EquipmentModel.php';
 require_once __DIR__ . '/../../Model/EquipmentTypeModel.php';
 require_once __DIR__ . '/../Users/JWTHelper.php';
-
+session_start();
+// Ví dụ kiểm tra quyền
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 1) {
+    header('Location: ../AccessDenied.php');
+    exit();
+}
 // $token = $_GET["token"] ?? "";
 // $userData = JWTHelper::verifyToken($token);
 // if (!$userData || $userData["role"] !== "admin") {
@@ -16,7 +20,7 @@ $conn = $database->getConnection();
 $model = new Equipment($conn);
 $equipments = $model->getAllEquipments()->fetchAll(PDO::FETCH_ASSOC);
 ?>
-
+<?php include '../shares/adminhd.php'; ?>
 <!DOCTYPE html>
 <html lang="vi">
 

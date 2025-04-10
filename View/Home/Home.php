@@ -20,6 +20,8 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
         <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
         <title>Quản Lý Sự Kiện</title>
         <link rel="stylesheet" href="../Home/style.css">
@@ -364,7 +366,7 @@
             </div>
         </section>
         <div class="about-section">
-        <h2 class="text-center fw-bold fade-up title">Giới thiệu</h2>
+            <h2 class="text-center fw-bold fade-up title">Giới thiệu</h2>
             <div class="about-container">
                 <div class="about-image fade-left">
                     <img src="https://scontent.fsgn19-1.fna.fbcdn.net/v/t39.30808-6/482240054_1194585768858839_5392605926008959326_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=wOWt_ZwQ1AsQ7kNvwEkPVFh&_nc_oc=Adk9bkIV9IWohxq_bhUQ_B6a72uPYZ7XyR8SvHGJsGMkTRGZPpaY8ZfCXzsZqdDRswM&_nc_zt=23&_nc_ht=scontent.fsgn19-1.fna&_nc_gid=08M_CYq8BWGA7mgzgYoQuA&oh=00_AfGlVaKrzGbjGNg9c2fw-4Csvgks6USDNNWNSdasD8AnUw&oe=67F8A6FE" alt="Hoang Huy Media Team">
@@ -373,7 +375,7 @@
                     <h4>CÔNG TY TNHH THƯƠNG MẠI DỊCH VỤ SỰ KIỆN</h4>
                     <h2>NHỰT COMPUTER MEDIA</h2>
                     <p>
-                        Công ty TNHH Thương Mại Dịch Vụ Sự Kiện EVENT (NHỰT COMPUTER  Media) là một công ty truyền thông uy tín tại Việt Nam, chuyên hoạt động trong các lĩnh vực như Media, Event, Activation, Teambuilding và Wedding.
+                        Công ty TNHH Thương Mại Dịch Vụ Sự Kiện EVENT (NHỰT COMPUTER Media) là một công ty truyền thông uy tín tại Việt Nam, chuyên hoạt động trong các lĩnh vực như Media, Event, Activation, Teambuilding và Wedding.
                     </p>
                     <p>
                         Thành lập từ năm 2025, công ty đã tổ chức thành công nhiều sự kiện lớn như hội nghị, ra mắt sản phẩm, kỷ niệm thành lập, tiệc tất niên, khai trương, tri ân khách hàng và teambuilding.
@@ -431,6 +433,41 @@
                 <div class="swiper-button-next"></div>
                 <div class="swiper-button-prev"></div>
                 <div class="swiper-pagination"></div>
+            </div>
+            <div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <form id="reviewForm">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="reviewModalLabel">Đánh giá địa điểm</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
+                            </div>
+                            <div class="modal-body">
+                                <input type="hidden" name="venue_id" id="venueIdInput">
+
+                                <div class="mb-3">
+                                    <label class="form-label">Nội dung đánh giá:</label>
+                                    <textarea name="comment" class="form-control" id="reviewText" required></textarea>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Số sao:</label>
+                                    <select name="rating" class="form-select" id="ratingSelect" required>
+                                        <option value="">Chọn số sao</option>
+                                        <option value="5">5 sao - Tuyệt vời</option>
+                                        <option value="4">4 sao - Tốt</option>
+                                        <option value="3">3 sao - Trung bình</option>
+                                        <option value="2">2 sao - Kém</option>
+                                        <option value="1">1 sao - Tệ</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">Gửi đánh giá</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
         <!-- Service Section -->
@@ -572,8 +609,59 @@
             document.querySelectorAll('.fade-left, .fade-up').forEach(el => {
                 observer.observe(el);
             });
+            document.querySelectorAll(".venue-slide").forEach(item => {
+                item.addEventListener("click", function() {
+                    const venueId = this.getAttribute("data-id");
+                    document.getElementById("venueIdInput").value = venueId;
+                    const modal = new bootstrap.Modal(document.getElementById('reviewModal'));
+                    modal.show();
+                });
+            });
+
+            // Xử lý form đánh giá
+            document.getElementById("reviewForm").addEventListener("submit", function(e) {
+                e.preventDefault();
+
+                const form = e.target;
+                const formData = new FormData(form);
+
+                fetch('../../Controller/ReviewController.php?action=create', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(res => {
+                        if (!res.ok) {
+                            throw new Error("Yêu cầu thất bại với mã: " + res.status);
+                        }
+                        return res.text(); // Lấy raw text trước để debug
+                    })
+                    .then(text => {
+                        try {
+                            const data = JSON.parse(text); // Chuyển sang JSON
+                            if (data.success) {
+                                alert("🎉 " + data.message);
+                                const modalEl = document.getElementById('reviewModal');
+                                const modalInstance = bootstrap.Modal.getInstance(modalEl);
+                                modalInstance.hide();
+                                form.reset();
+                            } else {
+                                alert("⚠️ " + data.message);
+                            }
+                        } catch (e) {
+                            console.error("Phản hồi không phải JSON:", text);
+                            alert("❌ Lỗi server: Phản hồi không hợp lệ. Kiểm tra console để biết thêm chi tiết.");
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Lỗi gửi đánh giá:', error);
+                        alert("❌ Gửi đánh giá thất bại: " + error.message);
+                    });
+            });
         </script>
+
     </body>
     <?php include '../shares/footer.php'; ?>
 
-    </html>
+    </html><!-- SCRIPT XỬ LÝ CLICK VÀ FORM -->
+
+    <!-- Modal đánh giá --> 

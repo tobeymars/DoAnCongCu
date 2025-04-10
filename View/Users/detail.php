@@ -487,7 +487,7 @@ $paddingLeftStyle = ($roleId == 1) ? 'body {padding-left: 250px;} .app-container
                         </div>
                     </div>
 
-                    <button type="button" class="btn" style="margin-top: 20px; background-color: var(--warning-color);">
+                    <button onclick="window.location.href='change_password.php?token=<?php echo urlencode($token); ?>'" class="btn" style="margin-top: 20px; background-color: var(--warning-color);">
                         <i class="fas fa-key"></i> Đổi mật khẩu
                     </button>
                 </div>

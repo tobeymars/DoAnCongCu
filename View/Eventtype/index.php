@@ -1,8 +1,13 @@
-<?php include '../shares/adminhd.php'; ?>
 <?php
 require_once __DIR__ . '/../../config/db.php';
 require_once __DIR__ . '/../../Model/EventtypeModel.php';
 require_once __DIR__ . '/../../Model/EventModel.php';
+session_start();
+// Ví dụ kiểm tra quyền
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 1) {
+    header('Location: ../AccessDenied.php');
+    exit();
+}
 $database = new Database();
 $conn = $database->getConnection();
 $eventmodel = new Event($conn);
@@ -20,6 +25,7 @@ foreach ($eventTypes as $index => $eventType) {
     $eventTypes[$index]['TotalEvents'] = $eventCount;
 }
 ?>
+<?php include '../shares/adminhd.php'; ?>
 <!DOCTYPE html>
 <html lang="vi">
 

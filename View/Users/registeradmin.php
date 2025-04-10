@@ -1,4 +1,3 @@
-<?php include '../shares/adminhd.php'; ?>
 <?php
 require_once __DIR__ . '/../../Controller/UserController.php';
 $database = new Database();
@@ -8,6 +7,7 @@ $message = $controller->registerUser();
 
 $roles = $controller->getRoles();
 ?>
+<?php include '../shares/adminhd.php'; ?>
 <!DOCTYPE html>
 <html lang="vi">
 

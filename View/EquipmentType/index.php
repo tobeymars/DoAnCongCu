@@ -1,13 +1,18 @@
-<?php include '../shares/adminhd.php'; ?>
 <?php
 require_once __DIR__ . '/../../config/db.php';
 require_once __DIR__ . '/../../Model/EquipmentTypeModel.php';
-
+session_start();
+// Ví dụ kiểm tra quyền
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 1) {
+    header('Location: ../AccessDenied.php');
+    exit();
+}
 $database = new Database();
 $conn = $database->getConnection();
 $model = new EquipmentType($conn);
 $equipmentTypes = $model->getAllEquipmentTypes()->fetchAll(PDO::FETCH_ASSOC);
 ?>
+<?php include '../shares/adminhd.php'; ?>
 <!DOCTYPE html>
 <html lang="vi">
 <head>

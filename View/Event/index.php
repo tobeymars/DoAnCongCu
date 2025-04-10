@@ -1,10 +1,15 @@
-<?php include '../shares/adminhd.php'; ?>
 <?php
 require_once __DIR__ . '/../../config/db.php';
 require_once __DIR__ . '/../../Model/EventModel.php';
 require_once __DIR__ . '/../../Model/EventtypeModel.php';
 require_once __DIR__ . '/../../Model/VenuesModel.php';
 require_once __DIR__ . '/../Users/JWTHelper.php';
+session_start();
+// Ví dụ kiểm tra quyền
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 1) {
+    header('Location: ../AccessDenied.php');
+    exit();
+}
 $database = new Database();
 $conn = $database->getConnection();
 $model = new Event($conn);
@@ -17,7 +22,7 @@ $venueModel = new Venue($conn);
 $eventTypes = $eventTypeModel->getAllEventTypes()->fetchAll(PDO::FETCH_ASSOC);
 $venues = $venueModel->getAllVenues()->fetchAll(PDO::FETCH_ASSOC);
 ?>
-
+<?php include '../shares/adminhd.php'; ?>
 <!DOCTYPE html>
 <html lang="vi">
 
